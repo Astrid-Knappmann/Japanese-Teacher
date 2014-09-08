@@ -4,157 +4,113 @@
  */
 package model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  *
  * @author Patrick
  */
-public class FlashCard {
+public class FlashCard implements Serializable {
 
     private String hiragana;
     private String romaji;
-    private String eWord;
+    private String english;
     private String kanji;
-    private String bundleEWORD;
-    private Date dateAnsweredEWORD;
-    private String bundleRomaji;
-    private Date dateAnsweredRomaji;
-    private String bundleHiragana;
-    private Date dateAnsweredHiragana;
-    private String bundleKanji;
-    private Date dateAnsweredKanji;
+    private String description;
+    private HashMap<String, ArrayList<HashMap<String, ?>>> dataList;
 
-    public FlashCard(String eWord, String romaji, String hiragana, String kanji) {
+    public FlashCard(String eWord, String romaji, String hiragana, String kanji, String description) {
         this.hiragana = hiragana;
-        this.eWord = eWord;
+        this.english = eWord;
         this.kanji = kanji;
         this.romaji = romaji;
-        bundleEWORD = "Daily";
-        dateAnsweredEWORD = new Date(0);
-        bundleRomaji = "Daily";
-        dateAnsweredRomaji = new Date(0);
-        bundleHiragana = "Daily";
-        dateAnsweredHiragana = new Date(0);
-        bundleKanji = "Daily";
-        dateAnsweredKanji = new Date(0);
+        this.description = description;
+        dataList = new HashMap<>();
     }
 
-    public FlashCard(String eWord, String romaji, String hiragana, String kanji, String bundleEWORD, long dateEWORD) {
-        this.hiragana = hiragana;
-        this.eWord = eWord;
-        this.kanji = kanji;
-        this.bundleEWORD = bundleEWORD;
-        this.dateAnsweredEWORD = new Date(dateEWORD);
-    }
-
-    public FlashCard(String eWord, String romaji, String hiragana, String kanji, String bundleEWORD, long dateAnsweredEWORD, String bundleRomaji, long dateAnsweredRomaji, String bundleHiragana, long dateAnsweredHiragana, String bundleKanji, long dateAnsweredKanji) {
+    public FlashCard(String hiragana, String romaji, String english, String kanji, String description, HashMap<String, ArrayList<HashMap<String, ?>>> dataList) {
         this.hiragana = hiragana;
         this.romaji = romaji;
-        this.eWord = eWord;
+        this.english = english;
         this.kanji = kanji;
-        this.bundleEWORD = bundleEWORD;
-        this.dateAnsweredEWORD = new Date(dateAnsweredEWORD);
-        this.bundleRomaji = bundleRomaji;
-        this.dateAnsweredRomaji = new Date(dateAnsweredRomaji);
-        this.bundleHiragana = bundleHiragana;
-        this.dateAnsweredHiragana = new Date(dateAnsweredHiragana);
-        this.bundleKanji = bundleKanji;
-        this.dateAnsweredKanji = new Date(dateAnsweredKanji);
+        this.description = description;
+        this.dataList = dataList;
     }
 
-    public String getRomaji() {
-        return romaji;
+    public void newUser(String user) {
+        ArrayList<HashMap<String, ?>> arrayList = new ArrayList<>();
+        HashMap<String, String> bundleMap = new HashMap<>();
+        HashMap<String, Long> timeAnsweredMap = new HashMap<>();
+        arrayList.add(bundleMap);
+        arrayList.add(timeAnsweredMap);
+        dataList.put(user, arrayList);
     }
 
-    public void setRomaji(String romaji) {
-        this.romaji = romaji;
-    }
-
-    public String getKanji() {
-        return kanji;
-    }
-
-    public void setKanji(String kanji) {
-        this.kanji = kanji;
+    public void firstTimeMode(String user, String mode) {
+        ArrayList<HashMap<String, ?>> arrayList = dataList.get(user);
+        HashMap<String, String> bundleMap = (HashMap<String, String>) arrayList.get(0);
+        HashMap<String, Long> timeAnsweredMap = (HashMap<String, Long>) arrayList.get(1);
+        bundleMap.put(mode, "Daily");
+        timeAnsweredMap.put(mode, 0l);
     }
 
     /**
      * This method puts the FlashCard into the next level of bundle, while
-     * setting the date answered to the current time. Parameter is an int,
-     * depending on what gametype is currently being played. 0 for English. 1
-     * for Romaji. 2 for Hiragana. 3 for Kanji
+     * setting the date answered to the current time.
+     *
+     * @param user
+     * @param mode
+     * @return New bundle.
      */
-    public String correct(int currentGameType) {
-        switch (currentGameType) {
-
-            case (0):
-                if (bundleEWORD.equalsIgnoreCase("Daily")) {
-                    bundleEWORD = "Weekly";
-                } else {
-                    bundleEWORD = "Monthly";
-                }
-                dateAnsweredEWORD = new Date();
-                return bundleEWORD;
-
-            case (1):
-                if (bundleRomaji.equalsIgnoreCase("Daily")) {
-                    bundleRomaji = "Weekly";
-                } else {
-                    bundleRomaji = "Monthly";
-                }
-                dateAnsweredRomaji = new Date();
-                return bundleEWORD;
-
-            case (2):
-                if (bundleHiragana.equalsIgnoreCase("Daily")) {
-                    bundleHiragana = "Weekly";
-                } else {
-                    bundleHiragana = "Monthly";
-                }
-                dateAnsweredHiragana = new Date();
-                return bundleEWORD;
-
-            case (3):
-                if (bundleKanji.equalsIgnoreCase("Daily")) {
-                    bundleKanji = "Weekly";
-                } else {
-                    bundleKanji = "Monthly";
-                }
-                dateAnsweredKanji = new Date();
-                return bundleEWORD;
+    public String correct(String user, String mode) {
+        String bundle = getBundle(user, mode);
+        getTimeAnsweredMap(user, mode).put(mode, new Date().getTime());
+        if (bundle.equalsIgnoreCase("Daily")) {
+            getBundleMap(user, mode).put(mode, "Weekly");
+            return "Weekly";
+        } else {
+            getBundleMap(user, mode).put(mode, "Monthly");
+            return "Monthly";
         }
-        return null;
     }
 
     /**
      * This method puts the FlashCard into the Daily bundle, while setting the
-     * date answered to the current time. Parameter is an int, depending on what
-     * gametype is currently being played. 0 for English. 1 for Romaji. 2 for
-     * Hiragana. 3 for Kanji
+     * date answered to the current time.
+     *
+     * @param user
+     * @param mode
      */
-    public void wrong(int currentGameType) {
-        switch (currentGameType) {
-            case (0):
-                bundleEWORD = "Daily";
-                dateAnsweredEWORD = new Date();
-                break;
+    public void wrong(String user, String mode) {
+        getTimeAnsweredMap(user, mode).put(mode, new Date().getTime());
+        getBundleMap(user, mode).put(mode, "Daily");
+    }
 
-            case (1):
-                bundleRomaji = "Daily";
-                dateAnsweredRomaji = new Date();
-                break;
+    public void resetCard(String user) {
+        dataList.remove(user);
+    }
 
-            case (2):
-                bundleHiragana = "Daily";
-                dateAnsweredHiragana = new Date();
-                break;
+    public void resetCard() {
+        dataList.clear();
+    }
 
-            case (3):
-                bundleKanji = "Daily";
-                dateAnsweredKanji = new Date();
-                break;
-        }
+    public HashMap<String, String> getBundleMap(String user, String mode) {
+        return (HashMap<String, String>) dataList.get(user).get(0);
+    }
+
+    public HashMap<String, Long> getTimeAnsweredMap(String user, String mode) {
+        return (HashMap<String, Long>) dataList.get(user).get(1);
+    }
+
+    public String getBundle(String user, String mode) {
+        return (String) dataList.get(user).get(0).get(mode);
+    }
+
+    public Long getTimeAnswered(String user, String mode) {
+        return (Long) dataList.get(user).get(1).get(mode);
     }
 
     public String getHiragana() {
@@ -165,77 +121,41 @@ public class FlashCard {
         this.hiragana = hiragana;
     }
 
-    public String geteWord() {
-        return eWord;
+    public String getRomaji() {
+        return romaji;
     }
 
-    public void seteWord(String eWord) {
-        this.eWord = eWord;
+    public void setRomaji(String romaji) {
+        this.romaji = romaji;
     }
 
-    public String getBundleEWORD() {
-        return bundleEWORD;
+    public String getEnglish() {
+        return english;
     }
 
-    public void setBundleEWORD(String bundleEWORD) {
-        this.bundleEWORD = bundleEWORD;
+    public void setEnglish(String english) {
+        this.english = english;
     }
 
-    public Date getDateAnsweredEWORD() {
-        return dateAnsweredEWORD;
+    public String getKanji() {
+        return kanji;
     }
 
-    public void setDateAnsweredEWORD(Date dateAnsweredEWORD) {
-        this.dateAnsweredEWORD = dateAnsweredEWORD;
+    public void setKanji(String kanji) {
+        this.kanji = kanji;
     }
 
-    public String getBundleRomaji() {
-        return bundleRomaji;
+    public String getDescription() {
+        return description;
     }
 
-    public void setBundleRomaji(String bundleRomaji) {
-        this.bundleRomaji = bundleRomaji;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public Date getDateAnsweredRomaji() {
-        return dateAnsweredRomaji;
+    @Override
+    public String toString() {
+        return "FlashCard{" + "hiragana=" + hiragana + ", romaji=" + romaji + ", english=" + english + ", kanji=" + kanji + ", description=" + description + '}';
     }
 
-    public void setDateAnsweredRomaji(Date dateAnsweredRomaji) {
-        this.dateAnsweredRomaji = dateAnsweredRomaji;
-    }
-
-    public String getBundleHiragana() {
-        return bundleHiragana;
-    }
-
-    public void setBundleHiragana(String bundleHiragana) {
-        this.bundleHiragana = bundleHiragana;
-    }
-
-    public Date getDateAnsweredHiragana() {
-        return dateAnsweredHiragana;
-    }
-
-    public void setDateAnsweredHiragana(Date dateAnsweredHiragana) {
-        this.dateAnsweredHiragana = dateAnsweredHiragana;
-    }
-
-    public String getBundleKanji() {
-        return bundleKanji;
-    }
-
-    public void setBundleKanji(String bundleKanji) {
-        this.bundleKanji = bundleKanji;
-    }
-
-    public Date getDateAnsweredKanji() {
-        return dateAnsweredKanji;
-    }
-
-    public void setDateAnsweredKanji(Date dateAnsweredKanji) {
-        this.dateAnsweredKanji = dateAnsweredKanji;
-    }
-    
-    
 }
