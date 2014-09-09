@@ -22,9 +22,9 @@ public class FlashCard implements Serializable {
     private String description;
     private HashMap<String, ArrayList<HashMap<String, ?>>> dataList;
 
-    public FlashCard(String eWord, String romaji, String hiragana, String kanji, String description) {
+    public FlashCard(String english, String romaji, String hiragana, String kanji, String description) {
         this.hiragana = hiragana;
-        this.english = eWord;
+        this.english = english;
         this.kanji = kanji;
         this.romaji = romaji;
         this.description = description;
