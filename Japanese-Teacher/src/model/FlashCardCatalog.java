@@ -53,7 +53,16 @@ public class FlashCardCatalog {
         FlashCardList list = new FlashCardList();
         long currentTime = new Date().getTime();
         for (FlashCard f : flashCards) {
-            String bundle = f.getBundle(user, mode);
+            String bundle = null;
+            try {
+                bundle = f.getBundle(user, mode);
+            } catch (NullPointerException ex) {
+                System.out.println("User not created");
+            }
+            if (bundle == null) {
+                f.firstTimeMode(user, mode);
+                bundle = f.getBundle(user, mode);
+            }
             switch (bundle) {
                 case "Daily":
                     if (currentTime - f.getTimeAnswered(user, mode) > 43200000l) {
@@ -76,6 +85,12 @@ public class FlashCardCatalog {
             }
         }
         return list;
+    }
+
+    public void newUser(String user) {
+        for (FlashCard f : flashCards) {
+            f.newUser(user);
+        }
     }
 
     public void saveFlashCards() {

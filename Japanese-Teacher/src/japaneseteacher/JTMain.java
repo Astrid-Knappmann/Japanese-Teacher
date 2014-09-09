@@ -39,5 +39,8 @@ public class JTMain {
         flashCardCatalog.create("no", "iie", "いいえ", "猫", "To disagree");
         flashCardCatalog.create("Friend", "tomodachi", "ともだち", "友達", "A person you have a mutually positive relationship with");
         System.out.println(flashCardCatalog.getFlashCards());
+        System.out.println("Pending Cards");
+        flashCardCatalog.newUser("Patrick");
+        System.out.println(flashCardCatalog.getPendingFlashCards("Patrick", "English to japanese"));
     }
 }
