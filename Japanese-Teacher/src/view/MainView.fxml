@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainViewCTRL">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="manageCardsItem" mnemonicParsing="false" onAction="#handleManageCards" text="Manage cards" />
+                  <MenuItem fx:id="manageUsersItem" mnemonicParsing="false" onAction="#handleManageUsers" text="Manage users" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <top>
+            <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <items>
+                <Button fx:id="startBTN" mnemonicParsing="false" onAction="#handleStart" prefHeight="31.0" prefWidth="100.0" text="Start" />
+              </items>
+            </ToolBar>
+         </top>
+         <center>
+            <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn fx:id="userCol" prefWidth="75.0" text="User" />
+                <TableColumn fx:id="modeCol" prefWidth="75.0" text="Mode" />
+                  <TableColumn fx:id="pendingCol" prefWidth="75.0" text="Pending cards" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </center>
+      </BorderPane>
+   </center>
+</BorderPane>

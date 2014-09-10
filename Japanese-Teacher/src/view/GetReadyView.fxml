@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GetReadyViewCTRL">
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <VBox alignment="TOP_CENTER" layoutX="312.0" layoutY="218.0" spacing="20.0">
+               <children>
+                  <ComboBox fx:id="userCB" layoutX="312.0" layoutY="208.0" prefWidth="200.0" promptText="Choose user">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </ComboBox>
+                  <ComboBox fx:id="modeCB" layoutX="312.0" layoutY="269.0" prefWidth="200.0" promptText="Choose mode" />
+                  <Button fx:id="startBTN" layoutX="362.0" layoutY="333.0" mnemonicParsing="false" onAction="#handleStart" prefWidth="100.0" text="Start" />
+                  <Button fx:id="backBTN" mnemonicParsing="false" onAction="#handleBack" prefWidth="100.0" text="Back" />
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

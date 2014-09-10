@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="528.0" maxWidth="1024.0" minHeight="528.0" minWidth="1024.0" prefHeight="528.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EnglishModeCTRL">
+   <children>
+      <AnchorPane layoutX="150.0" layoutY="191.0" prefHeight="186.0" prefWidth="724.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0">
+         <children>
+            <Label fx:id="englishWordLB" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutY="35.0" prefHeight="21.0" prefWidth="250.0" text="Hipopratimus" textAlignment="RIGHT" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font size="24.0" />
+               </font></Label>
+            <Label fx:id="romajiWordLB" layoutX="636.0" layoutY="35.0" prefWidth="250.0" text="ROMAJI" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="kanaWordLB" layoutX="464.0" layoutY="57.0" prefWidth="250.0" text="Kana" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="kanjiWordLB" layoutX="464.0" layoutY="77.0" prefWidth="250.0" text="Kanji" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="85.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Text fx:id="englishDescLB" layoutX="158.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" textAlignment="RIGHT" wrappingWidth="250.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="50.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Text>
+            <Separator layoutX="359.0" layoutY="-14.0" orientation="VERTICAL" AnchorPane.bottomAnchor="70.0" AnchorPane.topAnchor="10.0" />
+            <Button fx:id="rightBTN" layoutX="284.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleRight" prefWidth="70.0" text="Right" visible="false" />
+            <Button fx:id="wrongBTN" layoutX="364.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleWrong" prefWidth="70.0" text="Wrong" visible="false" />
+            <Button fx:id="answeredBTN" layoutX="284.0" layoutY="141.0" mnemonicParsing="false" onAction="#handleAnswered" prefWidth="150.0" text="I've answered" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

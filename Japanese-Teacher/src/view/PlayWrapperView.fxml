@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="768.0" maxWidth="1024.0" minHeight="768.0" minWidth="1024.0" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.PlayWrapperViewCTRL">
+   <top>
+      <AnchorPane prefHeight="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="33.0" layoutY="37.0" text="Playing" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="40.0">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Label>
+            <Label fx:id="modeLb" layoutX="30.0" layoutY="110.0" text="MODE" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="110.0">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </top>
+   <bottom>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <Button fx:id="backBTN" mnemonicParsing="false" onAction="#handleBack" prefWidth="100.0" text="Back" />
+        </items>
+      </ToolBar>
+   </bottom>
+</BorderPane>
